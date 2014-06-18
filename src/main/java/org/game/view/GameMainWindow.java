@@ -1,5 +1,8 @@
 package org.game.view;
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +12,7 @@ public class GameMainWindow extends JFrame{
 	
 	public GameMainWindow(){
 		setParameterWindow();
+		setLayoutWindow();
 	}
     	
 	public void setParameterWindow(){
@@ -21,14 +25,29 @@ public class GameMainWindow extends JFrame{
 	}
 	
 	public void setLayoutWindow(){
+		
 		JLabel gameTitle = new JLabel();
+		gameTitle.setText("2048");
+		gameTitle.setFont(new Font("", Font.BOLD,30));
+		
 		JLabel gameSlogan = new JLabel();
+		gameSlogan.setText("Join the numbers and get to the 2048 tile!");
+		gameSlogan.setFont(new Font("", Font.BOLD,15));
+		
 		JLabel currentScore = new JLabel();
+		currentScore.setBackground(Color.decode("#bbada0"));
+		
 		JLabel bestScore = new JLabel();
+		bestScore.setBackground(Color.decode("#bbada0"));
+		
 		JButton newGame = new JButton();
+		newGame.setText("New Game");
+		newGame.setFont(new Font("", Font.BOLD,15));
+		newGame.setBackground(Color.decode("#8f7a66"));
+		
 		JLabel copyRight = new JLabel();
-		
-		
+		copyRight.setText("Chuan DONG");
+		newGame.setFont(new Font("", Font.BOLD,10));
 	}
 	    
 	public static void main(String[] args) {
