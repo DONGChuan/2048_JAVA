@@ -1,6 +1,8 @@
 package org.game.view;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class GameMainWindow extends JFrame{
@@ -19,6 +21,13 @@ public class GameMainWindow extends JFrame{
 	}
 	
 	public void setLayoutWindow(){
+		JLabel gameTitle = new JLabel();
+		JLabel gameSlogan = new JLabel();
+		JLabel currentScore = new JLabel();
+		JLabel bestScore = new JLabel();
+		JButton newGame = new JButton();
+		JLabel copyRight = new JLabel();
+		
 		
 	}
 	    
