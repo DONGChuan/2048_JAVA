@@ -1,11 +1,13 @@
 package org.game.view;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class GameMainWindow extends JFrame{
@@ -25,7 +27,10 @@ public class GameMainWindow extends JFrame{
 	}
 	
 	public void setLayoutWindow(){
-		
+				
+		/*
+		 * Components
+		 */
 		JLabel gameTitle = new JLabel();
 		gameTitle.setText("2048");
 		gameTitle.setFont(new Font("", Font.BOLD,30));
@@ -48,6 +53,21 @@ public class GameMainWindow extends JFrame{
 		JLabel copyRight = new JLabel();
 		copyRight.setText("Chuan DONG");
 		newGame.setFont(new Font("", Font.BOLD,10));
+		
+		/*
+		 * Panel
+		 */
+		JPanel scorePanel = new JPanel();
+		JPanel row1Panel = new JPanel();
+		JPanel row2Panel = new JPanel();
+		
+		/*
+		 * Layout
+		 */
+		scorePanel.setLayout(new FlowLayout(FlowLayout.LEFT,30,10));
+		scorePanel.add(currentScore);
+		scorePanel.add(currentScore);
+		
 	}
 	    
 	public static void main(String[] args) {
