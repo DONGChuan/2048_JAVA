@@ -1,6 +1,5 @@
 package org.game.view;
 
-import java.awt.Color;
 import java.util.Random;
 
 import javax.swing.JLabel;
