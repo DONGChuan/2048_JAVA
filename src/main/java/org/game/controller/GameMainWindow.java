@@ -1,16 +1,30 @@
 package org.game.controller;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.game.view.GameCreatNew;
+import org.game.view.GameKeyEvent;
+import org.game.view.GameSetColor;
+
 public class GameMainWindow extends JFrame{
+	
+	private GameCreatNew CreatNewController;
+	private GameKeyEvent KeyEventController;
+	private GameSetColor ColorController;
+	
+	private JLabel[][] matrixGame;
 	
 	public GameMainWindow(){
 		super();
@@ -36,7 +50,7 @@ public class GameMainWindow extends JFrame{
 		gameSlogan.setBounds(20, 70, 320, 50);
 		add(gameSlogan);
 		
-		JLabel currentScore = new JLabel();
+		JTextField currentScore = new JTextField();
 		currentScore.setText("CURRENT");
 		currentScore.setOpaque(true); 
 		currentScore.setBackground(Color.decode("#bbada0"));
@@ -74,14 +88,19 @@ public class GameMainWindow extends JFrame{
 		mainPanel.setBounds(20, 150, 460, 500);	//设置主面板位置尺寸
 		mainPanel.setLayout(null);			
 		
-		JLabel[][] matrixGame = new JLabel[4][4];		
+		matrixGame = new JLabel[4][4];	
+		
+		ColorController = new GameSetColor();
+		CreatNewController = new GameCreatNew();
+		KeyEventController = new GameKeyEvent();
+		
 		for(int i = 0; i < 4; i++){			
 			for(int j = 0; j < 4; j++){
 				matrixGame[i][j] = new JLabel();
 				matrixGame[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				matrixGame[i][j].setText("");
-				matrixGame[i][j].setBounds(120 * j, 120 * i, 100, 100);		
-
+				matrixGame[i][j].setBounds(120 * j, 120 * i, 100, 100);	
+				matrixGame[i][j].setBackground(ColorController.getColor(""));
 				matrixGame[i][j].setOpaque(true);
 				matrixGame[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.green));
 				mainPanel.add(matrixGame[i][j]);							
@@ -91,6 +110,38 @@ public class GameMainWindow extends JFrame{
 			
 		add(mainPanel);
 		
+		
+		currentScore.addKeyListener(new KeyAdapter(){				
+			public void keyPressed(KeyEvent e){
+				int code = e.getKeyCode();	//Returns the integer keyCode associated with the key in this event
+				switch(code){
+				//Left
+				case KeyEvent.VK_LEFT:
+				case KeyEvent.VK_A:		    
+					KeyEventController.do_Left(matrixGame);
+					break;
+				//Right
+				case KeyEvent.VK_RIGHT:
+				case KeyEvent.VK_D:
+					KeyEventController.do_Right(matrixGame);
+					break;
+				//Up
+				case KeyEvent.VK_UP:
+				case KeyEvent.VK_W:
+					KeyEventController.do_Up(matrixGame);
+					break;
+				//Down
+				case KeyEvent.VK_DOWN:
+				case KeyEvent.VK_S:
+					KeyEventController.do_Down(matrixGame);
+					break;
+				}
+			}
+		});
+		
+		CreatNewController.CreateNew(matrixGame);
+		CreatNewController.CreateNew(matrixGame);
+		
 	}
 	
 	public void setLayoutWindow(){
@@ -98,15 +149,29 @@ public class GameMainWindow extends JFrame{
 	}
 	    
 	public static void main(String[] args) {
-		GameMainWindow ex = new GameMainWindow();
-		ex.setVisible(true);
+//		GameMainWindow ex = new GameMainWindow();
+//		ex.setVisible(true);
 		
-//		EventQueue.invokeLater(new Runnable() {
-//			@Override
-//		    public void run() {
-//				GameMainWindow ex = new GameMainWindow();
-//				ex.setVisible(true);
-//		    }
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+		    public void run() {
+				GameMainWindow ex = new GameMainWindow();
+				ex.setVisible(true);
+		    }
+		});
+//		EventQueue.invokeLater(new Runnable(){
+//			public void run(){
+//				try{
+//					GameMainWindow frame = new GameMainWindow();
+//					frame.setVisible(true);
+//				//	Thread thread = new Thread(frame);
+//				//	thread.start();
+//				}
+//				catch(Exception e1){
+//					e1.printStackTrace();
+//				}
+//			}
 //		});
-    }
+	}
+	
 }

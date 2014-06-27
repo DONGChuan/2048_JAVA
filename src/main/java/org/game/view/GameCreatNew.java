@@ -11,6 +11,8 @@ public class GameCreatNew {
 	Random random = new Random();
 	
 	public void CreateNew(JLabel[][] matrixGame){
+		ColorController = new GameSetColor();
+		
 		int i ,j;
 		boolean flag = false;
 		String str;
@@ -23,7 +25,7 @@ public class GameCreatNew {
 				
 				if((str.compareTo("") == 0)){
 					matrixGame[i][j].setText("2");
-					ColorController.setColor(matrixGame, i, j, "2");
+					matrixGame[i][j].setBackground(ColorController.getColor("2"));
 				
 					times --;
 					flag = true;	

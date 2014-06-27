@@ -4,49 +4,40 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
-public abstract class GameSetColor {
+public class GameSetColor {
 	
-	public void setColor(JLabel[][] matrixGame, int i, int j, String str){
+	public GameSetColor(){}
+	
+	public Color getColor(String str){
 		switch(str){
 		case "2":
-			matrixGame[i][j].setBackground(Color.yellow);
-			break;
+			return Color.yellow;
 		case "4":
-			matrixGame[i][j].setBackground(Color.red);
-			break;
+			return Color.red;
 		case "8":
-			matrixGame[i][j].setBackground(Color.pink);
-			break;
+			return Color.pink;
 		case "16":
-			matrixGame[i][j].setBackground(Color.orange);
-			break;
+			return Color.orange;
 		case "32":
-			matrixGame[i][j].setBackground(Color.magenta);
-			break;
+			return Color.magenta;
 		case "64":
-			matrixGame[i][j].setBackground(Color.LIGHT_GRAY);
-			break;
+			return Color.LIGHT_GRAY;
 		case "128":
-			matrixGame[i][j].setBackground(Color.green);
-			break;
+			return Color.green;
 		case "256":
-			matrixGame[i][j].setBackground(Color.GRAY);
-			break;
+			return Color.GRAY;
 		case "512":
-			matrixGame[i][j].setBackground(Color.DARK_GRAY);
-			break;
+			return Color.DARK_GRAY;
 		case "1024":
-			matrixGame[i][j].setBackground(Color.cyan);
-			break;
+			return Color.cyan;
 		case "2048":
-			matrixGame[i][j].setBackground(Color.blue);
-			break;
+			return Color.blue;
 		case "":
 		case "4096":
-			matrixGame[i][j].setBackground(Color.white);
-			break;
+			return Color.white;
 		default:
 			break;
 		}
+		return null;
 	}
 }
