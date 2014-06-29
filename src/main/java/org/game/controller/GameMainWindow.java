@@ -71,9 +71,9 @@ public class GameMainWindow extends JFrame{
 		
 		JButton newGame = new JButton();
 		newGame.setText("New Game");
-		newGame.setForeground(Color.decode("#f9f6f2"));
 		newGame.setFont(new Font("", Font.BOLD,15));
 		newGame.setBackground(Color.decode("#8f7a66"));
+		newGame.setForeground(Color.decode("#f9f6f2"));
 		newGame.setBounds(330, 80, 130, 30);
 		add(newGame);
 	
@@ -91,7 +91,7 @@ public class GameMainWindow extends JFrame{
 		/*
 		 * Layout
 		 */
-		mainPanel.setBounds(20, 150, 460, 500);	//设置主面板位置尺寸
+		mainPanel.setBounds(20, 150, 460, 500);	
 		mainPanel.setLayout(null);			
 		
 		matrixGame = new JLabel[4][4];	
@@ -108,7 +108,6 @@ public class GameMainWindow extends JFrame{
 				matrixGame[i][j].setBounds(120 * j, 120 * i, 100, 100);
 				MatrixController.setMatrix(matrixGame, i, j, "");
 				matrixGame[i][j].setOpaque(true);
-				//matrixGame[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.green));
 				mainPanel.add(matrixGame[i][j]);							
 				
 			}
@@ -124,7 +123,6 @@ public class GameMainWindow extends JFrame{
 		    	GameRestart.startNewGame(matrixGame);
 		    }
 		});
-
 		
 		currentScore.addKeyListener(new KeyAdapter(){				
 			public void keyPressed(KeyEvent e){
