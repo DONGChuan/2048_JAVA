@@ -15,8 +15,9 @@ public class GameKeyEvent {
 		MatrixController = new MatrixTextColor();
 	}
 	
-	public void do_Left(JLabel[][] matrixGame){
-							
+	public int do_Left(JLabel[][] matrixGame){
+		
+		int score = 0;
 		int num;
 		for(int i = 0; i < 4; i++){	
 			edgeLimit = 5;
@@ -30,6 +31,7 @@ public class GameKeyEvent {
 						MatrixController.setMatrix(matrixGame, i, j, "");
 					}else if((str.compareTo(strNeighboour) == 0) && (j !=edgeLimit) && (j != edgeLimit-1)){			
 						num  = Integer.parseInt(str);
+						score += num;
 						str = String.valueOf(2 * num);
 						MatrixController.setMatrix(matrixGame, i, j-1, str);
 						MatrixController.setMatrix(matrixGame, i, j, "");
@@ -39,10 +41,12 @@ public class GameKeyEvent {
 			}
 		}
 		CreatNewController.CreateNew(matrixGame);
+		return score;
 	}
 		
-	public void do_Right(JLabel[][] matrixGame){	
-							
+	public int do_Right(JLabel[][] matrixGame){	
+		
+		int score = 0;
 		int num;
 		for(int i = 0; i < 4; i ++){
 			edgeLimit = 5;
@@ -57,6 +61,7 @@ public class GameKeyEvent {
 					}
 					else if(str.compareTo(strNeighboour) == 0 && j !=edgeLimit && j != edgeLimit+ 1){
 						num  = Integer.parseInt(str);
+						score += num;
 						str = String.valueOf(2 * num);
 						MatrixController.setMatrix(matrixGame, i, j+1, str);
 						MatrixController.setMatrix(matrixGame, i, j, "");
@@ -66,10 +71,12 @@ public class GameKeyEvent {
 			}
 		}
 		CreatNewController.CreateNew(matrixGame);
+		return score;
 	}
 		
-	public void do_Up(JLabel[][] matrixGame){	
-						
+	public int do_Up(JLabel[][] matrixGame){	
+		
+		int score = 0;
 		int num;
 		for(int j = 0; j < 4; j++){
 			edgeLimit = 5;
@@ -84,6 +91,7 @@ public class GameKeyEvent {
 					}
 					else if(str.compareTo(strNeighboour) == 0 && i != edgeLimit && i != edgeLimit -1){
 						num  = Integer.parseInt(str);
+						score += num;
 						str = String.valueOf(2 * num);
 						MatrixController.setMatrix(matrixGame, i-1, j, str);
 						MatrixController.setMatrix(matrixGame, i, j, "");
@@ -93,10 +101,12 @@ public class GameKeyEvent {
 			}
 		}
 		CreatNewController.CreateNew(matrixGame);
+		return score;
 	}
 		
-	public void do_Down(JLabel[][] matrixGame){	
-							
+	public int do_Down(JLabel[][] matrixGame){	
+		
+		int score = 0;
 		int num;
 		
 		for(int j = 0; j < 4; j ++){
@@ -112,6 +122,7 @@ public class GameKeyEvent {
 					}
 					else if(str.compareTo(strNeighboour) == 0 && i != edgeLimit && i != edgeLimit + 1){
 						num  = Integer.parseInt(str);
+						score += num;
 						str = String.valueOf(2 * num);
 						MatrixController.setMatrix(matrixGame, i+1, j, str);
 						MatrixController.setMatrix(matrixGame, i, j, "");
@@ -121,6 +132,7 @@ public class GameKeyEvent {
 			}
 		}
 		CreatNewController.CreateNew(matrixGame);
+		return score;
 	}
 }
 	

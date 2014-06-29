@@ -28,6 +28,7 @@ public class GameMainWindow extends JFrame{
 	private MatrixTextColor MatrixController;
 	private InitGame GameRestart;
 	
+	private int Score;
 	private JLabel[][] matrixGame;
 	
 	public GameMainWindow(){
@@ -55,11 +56,12 @@ public class GameMainWindow extends JFrame{
 		gameSlogan.setBounds(20, 70, 320, 50);
 		add(gameSlogan);
 		
-		JTextField currentScore = new JTextField();
-		currentScore.setText("CURRENT");
+		final JTextField currentScore = new JTextField("SCORE :");
 		currentScore.setOpaque(true); 
 		currentScore.setBackground(Color.decode("#bbada0"));
+		currentScore.setForeground(Color.WHITE);
 		currentScore.setBounds(280, 20, 80, 50);
+		currentScore.setEditable(false);
 		add(currentScore);
 		
 		JLabel bestScore = new JLabel();
@@ -115,6 +117,8 @@ public class GameMainWindow extends JFrame{
 			
 		add(mainPanel);
 		
+		Score = 0;
+		
 		newGame.addMouseListener(new MouseAdapter()
 		{
 		    @Override
@@ -131,22 +135,26 @@ public class GameMainWindow extends JFrame{
 				//Left
 				case KeyEvent.VK_LEFT:
 				case KeyEvent.VK_A:		    
-					KeyEventController.do_Left(matrixGame);
+					Score += KeyEventController.do_Left(matrixGame);
+					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				//Right
 				case KeyEvent.VK_RIGHT:
 				case KeyEvent.VK_D:
-					KeyEventController.do_Right(matrixGame);
+					Score += KeyEventController.do_Right(matrixGame);
+					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				//Up
 				case KeyEvent.VK_UP:
 				case KeyEvent.VK_W:
-					KeyEventController.do_Up(matrixGame);
+					Score += KeyEventController.do_Up(matrixGame);
+					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				//Down
 				case KeyEvent.VK_DOWN:
 				case KeyEvent.VK_S:
-					KeyEventController.do_Down(matrixGame);
+					Score += KeyEventController.do_Down(matrixGame);
+					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				}
 			}
