@@ -16,13 +16,13 @@ import javax.swing.SwingConstants;
 
 import org.game.view.GameCreatNew;
 import org.game.view.GameKeyEvent;
-import org.game.view.GameSetColor;
+import org.game.view.MatrixTextColor;
 
 public class GameMainWindow extends JFrame{
 	
 	private GameCreatNew CreatNewController;
 	private GameKeyEvent KeyEventController;
-	private GameSetColor ColorController;
+	private MatrixTextColor MatrixController;
 	
 	private JLabel[][] matrixGame;
 	
@@ -70,7 +70,7 @@ public class GameMainWindow extends JFrame{
 		newGame.setBackground(Color.decode("#8f7a66"));
 		newGame.setBounds(330, 80, 130, 30);
 		add(newGame);
-		
+	
 		JLabel copyRight = new JLabel();
 		copyRight.setText("Chuan DONG");
 		copyRight.setFont(new Font("", Font.BOLD,10));
@@ -90,7 +90,7 @@ public class GameMainWindow extends JFrame{
 		
 		matrixGame = new JLabel[4][4];	
 		
-		ColorController = new GameSetColor();
+		MatrixController = new MatrixTextColor();
 		CreatNewController = new GameCreatNew();
 		KeyEventController = new GameKeyEvent();
 		
@@ -98,9 +98,8 @@ public class GameMainWindow extends JFrame{
 			for(int j = 0; j < 4; j++){
 				matrixGame[i][j] = new JLabel();
 				matrixGame[i][j].setHorizontalAlignment(SwingConstants.CENTER);
-				matrixGame[i][j].setText("");
-				matrixGame[i][j].setBounds(120 * j, 120 * i, 100, 100);	
-				matrixGame[i][j].setBackground(ColorController.getColor(""));
+				matrixGame[i][j].setBounds(120 * j, 120 * i, 100, 100);
+				MatrixController.setMatrix(matrixGame, i, j, "");
 				matrixGame[i][j].setOpaque(true);
 				matrixGame[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.green));
 				mainPanel.add(matrixGame[i][j]);							
@@ -149,9 +148,7 @@ public class GameMainWindow extends JFrame{
 	}
 	    
 	public static void main(String[] args) {
-//		GameMainWindow ex = new GameMainWindow();
-//		ex.setVisible(true);
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 		    public void run() {

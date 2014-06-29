@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 
 public class GameKeyEvent {
 	
-	private GameSetColor ColorController;
+	private MatrixTextColor MatrixController;
 	private GameCreatNew CreatNewController;
 	private int edgeLimit;
 	private String str;
@@ -12,7 +12,7 @@ public class GameKeyEvent {
 	
 	public GameKeyEvent(){
 		CreatNewController = new GameCreatNew();
-		ColorController = new GameSetColor();
+		MatrixController = new MatrixTextColor();
 	}
 	
 	public void do_Left(JLabel[][] matrixGame){
@@ -26,17 +26,13 @@ public class GameKeyEvent {
 					strNeighboour = matrixGame[i][j-1].getText();			
 					
 					if(strNeighboour.compareTo("") == 0){
-						matrixGame[i][j-1].setText(str);			
-						matrixGame[i][j-1].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");				
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i, j-1, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 					}else if((str.compareTo(strNeighboour) == 0) && (j !=edgeLimit) && (j != edgeLimit-1)){			
 						num  = Integer.parseInt(str);
 						str = String.valueOf(2 * num);
-						matrixGame[i][j-1].setText(str);			
-						matrixGame[i][j-1].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");				
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i, j-1, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 						edgeLimit = j;
 					}
 				}	
@@ -56,18 +52,14 @@ public class GameKeyEvent {
 					strNeighboour = matrixGame[i][j + 1].getText();
 					
 					if(strNeighboour.compareTo("") == 0){
-						matrixGame[i][j + 1].setText(str);
-						matrixGame[i][j + 1].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i, j+1, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 					}
 					else if(str.compareTo(strNeighboour) == 0 && j !=edgeLimit && j != edgeLimit+ 1){
 						num  = Integer.parseInt(str);
 						str = String.valueOf(2 * num);
-						matrixGame[i][j + 1].setText(str);
-						matrixGame[i][j + 1].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i, j+1, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 						edgeLimit = j;
 					}
 				}
@@ -87,18 +79,14 @@ public class GameKeyEvent {
 					strNeighboour = matrixGame[i - 1][j].getText();
 				
 					if(strNeighboour.compareTo("") == 0){
-						matrixGame[i - 1][j].setText(str);
-						matrixGame[i - 1][j].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i-1, j, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 					}
 					else if(str.compareTo(strNeighboour) == 0 && i != edgeLimit && i != edgeLimit -1){
 						num  = Integer.parseInt(str);
 						str = String.valueOf(2 * num);
-						matrixGame[i - 1][j].setText(str);
-						matrixGame[i - 1][j].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i-1, j, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 						edgeLimit = i;
 					}
 				}
@@ -119,18 +107,14 @@ public class GameKeyEvent {
 					strNeighboour = matrixGame[i + 1][j].getText();
 					
 					if(strNeighboour.compareTo("") == 0){
-						matrixGame[i + 1][j].setText(str);
-						matrixGame[i + 1][j].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i+1, j, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 					}
 					else if(str.compareTo(strNeighboour) == 0 && i != edgeLimit && i != edgeLimit + 1){
 						num  = Integer.parseInt(str);
 						str = String.valueOf(2 * num);
-						matrixGame[i + 1][j].setText(str );
-						matrixGame[i + 1][j].setBackground(ColorController.getColor(str));
-						matrixGame[i][j].setText("");
-						matrixGame[i][j].setBackground(ColorController.getColor(""));
+						MatrixController.setMatrix(matrixGame, i+1, j, str);
+						MatrixController.setMatrix(matrixGame, i, j, "");
 						edgeLimit = i;
 					}
 				}

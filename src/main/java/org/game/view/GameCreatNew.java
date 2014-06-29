@@ -6,30 +6,25 @@ import javax.swing.JLabel;
 
 public class GameCreatNew {
 	
-	private GameSetColor ColorController;
-	private int times = 16;									
+	private MatrixTextColor MatrixController;							
 	Random random = new Random();
 	
 	public void CreateNew(JLabel[][] matrixGame){
-		ColorController = new GameSetColor();
+		MatrixController = new MatrixTextColor();
 		
 		int i ,j;
 		boolean flag = false;
 		String str;
 		
-		if(times > 0){
-			while(!flag){
-				i = random.nextInt(4);// Random 0 ~ 3
-				j = random.nextInt(4);
-				str = matrixGame[i][j].getText();
-				
-				if((str.compareTo("") == 0)){
-					matrixGame[i][j].setText("2");
-					matrixGame[i][j].setBackground(ColorController.getColor("2"));
-				
-					times --;
-					flag = true;	
-				}
+		while(!flag){
+			i = random.nextInt(4);// Random 0 ~ 3
+			j = random.nextInt(4);
+			str = matrixGame[i][j].getText();
+			
+			if((str.compareTo("") == 0)){
+				MatrixController.setMatrix(matrixGame, i, j, "2");
+
+				flag = true;	
 			}
 		}
 	}
