@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import org.game.view.GameCreatNew;
 import org.game.view.GameKeyEvent;
+import org.game.view.InitGame;
 import org.game.view.MatrixTextColor;
 
 public class GameMainWindow extends JFrame{
@@ -23,6 +26,7 @@ public class GameMainWindow extends JFrame{
 	private GameCreatNew CreatNewController;
 	private GameKeyEvent KeyEventController;
 	private MatrixTextColor MatrixController;
+	private InitGame GameRestart;
 	
 	private JLabel[][] matrixGame;
 	
@@ -40,7 +44,8 @@ public class GameMainWindow extends JFrame{
 		 */
 		JLabel gameTitle = new JLabel();
 		gameTitle.setText("2048");
-		gameTitle.setFont(new Font("", Font.BOLD,30));
+		gameTitle.setFont(new Font("", Font.BOLD,40));
+		gameTitle.setForeground(Color.decode("#776e65"));
 		gameTitle.setBounds(20, 20, 150, 50);
 		add(gameTitle);
 		
@@ -66,6 +71,7 @@ public class GameMainWindow extends JFrame{
 		
 		JButton newGame = new JButton();
 		newGame.setText("New Game");
+		newGame.setForeground(Color.decode("#f9f6f2"));
 		newGame.setFont(new Font("", Font.BOLD,15));
 		newGame.setBackground(Color.decode("#8f7a66"));
 		newGame.setBounds(330, 80, 130, 30);
@@ -93,6 +99,7 @@ public class GameMainWindow extends JFrame{
 		MatrixController = new MatrixTextColor();
 		CreatNewController = new GameCreatNew();
 		KeyEventController = new GameKeyEvent();
+		GameRestart = new InitGame();
 		
 		for(int i = 0; i < 4; i++){			
 			for(int j = 0; j < 4; j++){
@@ -101,7 +108,7 @@ public class GameMainWindow extends JFrame{
 				matrixGame[i][j].setBounds(120 * j, 120 * i, 100, 100);
 				MatrixController.setMatrix(matrixGame, i, j, "");
 				matrixGame[i][j].setOpaque(true);
-				matrixGame[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.green));
+				//matrixGame[i][j].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.green));
 				mainPanel.add(matrixGame[i][j]);							
 				
 			}
@@ -109,6 +116,15 @@ public class GameMainWindow extends JFrame{
 			
 		add(mainPanel);
 		
+		newGame.addMouseListener(new MouseAdapter()
+		{
+		    @Override
+		    public void mouseClicked(MouseEvent arg0) 
+		    {
+		    	GameRestart.startNewGame(matrixGame);
+		    }
+		});
+
 		
 		currentScore.addKeyListener(new KeyAdapter(){				
 			public void keyPressed(KeyEvent e){
