@@ -56,19 +56,22 @@ public class GameMainWindow extends JFrame{
 		gameSlogan.setBounds(20, 70, 320, 50);
 		add(gameSlogan);
 		
-		final JTextField currentScore = new JTextField("SCORE :");
+		final JTextField currentScore = new JTextField(" SCORE :0");
 		currentScore.setOpaque(true); 
 		currentScore.setBackground(Color.decode("#bbada0"));
 		currentScore.setForeground(Color.WHITE);
-		currentScore.setBounds(280, 20, 80, 50);
+		currentScore.setFont(new Font("", Font.BOLD,15));
+		currentScore.setBounds(200, 20, 130, 50);
 		currentScore.setEditable(false);
 		add(currentScore);
 		
 		JLabel bestScore = new JLabel();
-		bestScore.setText("BEST");
+		bestScore.setText(" BEST :0");
 		bestScore.setOpaque(true); 
 		bestScore.setBackground(Color.decode("#bbada0"));
-		bestScore.setBounds(400, 20, 80, 50);
+		bestScore.setForeground(Color.WHITE);
+		bestScore.setFont(new Font("", Font.BOLD,15));
+		bestScore.setBounds(350, 20, 130, 50);
 		add(bestScore);
 		
 		JButton newGame = new JButton();
@@ -76,11 +79,11 @@ public class GameMainWindow extends JFrame{
 		newGame.setFont(new Font("", Font.BOLD,15));
 		newGame.setBackground(Color.decode("#8f7a66"));
 		newGame.setForeground(Color.decode("#f9f6f2"));
-		newGame.setBounds(330, 80, 130, 30);
+		newGame.setBounds(350, 80, 130, 30);
 		add(newGame);
 	
 		JLabel copyRight = new JLabel();
-		copyRight.setText("Chuan DONG");
+		copyRight.setText("© 2014 Chuan Dong. Simulation of game 2048 by Java Swing");
 		copyRight.setFont(new Font("", Font.BOLD,10));
 		copyRight.setBounds(20, 630, 150, 50);
 		add(copyRight);
