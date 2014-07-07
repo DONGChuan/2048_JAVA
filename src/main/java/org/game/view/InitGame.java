@@ -2,6 +2,13 @@ package org.game.view;
 
 import javax.swing.JLabel;
 
+/**
+ *Title: InitGame
+ *Description: This class is used to restart the game.
+ *Copyright: Copyright(c)2014
+ *@author DONG Chuan
+ *@version 1.0
+ */
 public class InitGame {
 	
 	private MatrixTextColor MatrixController;
@@ -20,6 +27,9 @@ public class InitGame {
 			}
 		}
 		
+		/*
+		 * Creat two random positions "2" elements for a new game
+		 */
 		CreatNewController.CreateNew(matrixGame);
 		CreatNewController.CreateNew(matrixGame);
 	}

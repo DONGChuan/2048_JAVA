@@ -5,6 +5,14 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 
+/**
+ *Title: MatrixTextColor
+ *Description: This class is used to change the game matrix. It will change the color, the font
+ *and the text according the inputs of functions.
+ *Copyright: Copyright(c)2014
+ *@author DONG Chuan
+ *@version 1.0
+ */
 public class MatrixTextColor {		
 	
 	public MatrixTextColor(){}

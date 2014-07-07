@@ -4,6 +4,13 @@ import java.util.Random;
 
 import javax.swing.JLabel;
 
+/**
+ *Title: GameCreatNew
+ *Description: This class is used to creat a new "2" element at a random position
+ *Copyright: Copyright(c)2014
+ *@author DONG Chuan
+ *@version 1.0
+ */
 public class GameCreatNew {
 	
 	private MatrixTextColor MatrixController;							

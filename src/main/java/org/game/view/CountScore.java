@@ -22,7 +22,6 @@ public class CountScore {
 		return score;
 	}
 
-
 	public void setScore(Score score) {
 		this.score = score;
 	}

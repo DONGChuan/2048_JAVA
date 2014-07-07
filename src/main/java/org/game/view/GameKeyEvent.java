@@ -2,6 +2,14 @@ package org.game.view;
 
 import javax.swing.JLabel;
 
+/**
+ *Title: GameKeyEvent
+ *Description: This class is used to listen the key events. It will change the game matrix
+ *according to the input key. Here, it includes UP, DOWN, LEFT, RIGHT events.
+ *Copyright: Copyright(c)2014
+ *@author DONG Chuan
+ *@version 1.0
+ */
 public class GameKeyEvent {
 	
 	private MatrixTextColor MatrixController;

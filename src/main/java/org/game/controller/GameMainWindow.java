@@ -163,6 +163,9 @@ public class GameMainWindow extends JFrame{
 			}
 		});
 		
+		/*
+		 * Creat two random positions "2" elements for a new game
+		 */
 		CreatNewController.CreateNew(matrixGame);
 		CreatNewController.CreateNew(matrixGame);
 		
