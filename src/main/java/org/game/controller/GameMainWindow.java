@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,11 +16,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.game.model.BestScore;
+import org.game.view.CountScore;
 import org.game.view.GameCreatNew;
 import org.game.view.GameKeyEvent;
 import org.game.view.InitGame;
 import org.game.view.MatrixTextColor;
+import org.xml.sax.SAXException;
 
 public class GameMainWindow extends JFrame{
 	
@@ -27,6 +32,7 @@ public class GameMainWindow extends JFrame{
 	private GameKeyEvent KeyEventController;
 	private MatrixTextColor MatrixController;
 	private InitGame GameRestart;
+	private CountScore ScoreController;
 	
 	private int Score;
 	private JLabel[][] matrixGame;
@@ -65,7 +71,7 @@ public class GameMainWindow extends JFrame{
 		currentScore.setEditable(false);
 		add(currentScore);
 		
-		JLabel bestScore = new JLabel();
+		final JLabel bestScore = new JLabel();
 		bestScore.setText(" BEST :0");
 		bestScore.setOpaque(true); 
 		bestScore.setBackground(Color.decode("#bbada0"));
@@ -105,6 +111,7 @@ public class GameMainWindow extends JFrame{
 		CreatNewController = new GameCreatNew();
 		KeyEventController = new GameKeyEvent();
 		GameRestart = new InitGame();
+		ScoreController = new CountScore();
 		
 		for(int i = 0; i < 4; i++){			
 			for(int j = 0; j < 4; j++){
@@ -121,6 +128,16 @@ public class GameMainWindow extends JFrame{
 		add(mainPanel);
 		
 		Score = 0;
+		
+		/*
+		 * Get the best score from the xml file
+		 */
+		try {
+			ScoreController.setScore(ScoreController.getScoreXML());
+		} catch (ParserConfigurationException | SAXException | IOException e1) {
+			e1.printStackTrace();
+		}
+				
 		
 		newGame.addMouseListener(new MouseAdapter()
 		{
@@ -159,6 +176,14 @@ public class GameMainWindow extends JFrame{
 					Score += KeyEventController.do_Down(matrixGame);
 					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
+				}
+				
+				/*
+				* Compared with the best score, if > bestScore, show this score 
+				* in the JLabel bestScore 
+				*/
+				if(Score > ScoreController.getScore().getScore()){
+					bestScore.setText(" BEST : " + String.valueOf(Score));
 				}
 			}
 		});

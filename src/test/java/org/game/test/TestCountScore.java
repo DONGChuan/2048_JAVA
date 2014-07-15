@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.game.model.Score;
+import org.game.model.BestScore;
 import org.game.view.CountScore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -27,7 +27,7 @@ public class TestCountScore {
 	public void testSetScoreXML() throws ParserConfigurationException, SAXException, IOException {
 		
 		CountScore a = new CountScore();
-		Score tmp = new Score();
+		BestScore tmp = new BestScore();
 		tmp.setScore(2000);
 		
 		a.setScore(a.getScoreXML());

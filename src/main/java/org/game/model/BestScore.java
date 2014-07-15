@@ -7,7 +7,7 @@ package org.game.model;
  *@author DONG Chuan
  *@version 1.0
  */
-public class Score {
+public class BestScore {
 	
 	int score;
 
