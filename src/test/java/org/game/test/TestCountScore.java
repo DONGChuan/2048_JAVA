@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.game.model.BestScore;
 import org.game.view.CountScore;
@@ -16,23 +17,24 @@ public class TestCountScore {
 	@Test
 	public void testGetScoreXML() throws ParserConfigurationException, SAXException, IOException {
 		
-		// Before test, set score in Game.xml to 1000 
+		// Before test, set score in Game.xml to 100 
 		CountScore a = new CountScore();
 		a.setScore(a.getScoreXML());
 
-		assertEquals(1000, a.getScore().getScore());
+		assertEquals(100, a.getScore().getScore());
 	}
 	
 	@Test
-	public void testSetScoreXML() throws ParserConfigurationException, SAXException, IOException {
+	public void testSetScoreXML() throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		
-		CountScore a = new CountScore();
 		BestScore tmp = new BestScore();
 		tmp.setScore(2000);
 		
-		a.setScore(a.getScoreXML());
-
-		assertEquals(2000, a.getScore().getScore());
+		CountScore a = new CountScore();
+		a.setScoreXML(tmp);
+		
+		System.out.println(a.getScoreXML().getScore());
+		assertEquals(2000, a.getScoreXML().getScore());
 	}
 
 }

@@ -6,6 +6,12 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.game.model.BestScore;
 import org.w3c.dom.Document;
@@ -42,7 +48,7 @@ public class CountScore {
 		
 	}
 	
-    public void setScoreXML(BestScore score) throws ParserConfigurationException, SAXException, IOException {
+    public void setScoreXML(BestScore score) throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -50,6 +56,13 @@ public class CountScore {
  
 		Node sc = doc.getElementsByTagName("Score").item(0);
 		sc.setTextContent(String.valueOf(score.getScore()));
+        
+		// write the content into xml file
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File(PATHXML));
+		transformer.transform(source, result);
  
 	}
 }

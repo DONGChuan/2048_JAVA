@@ -7,6 +7,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;  
+import java.awt.event.WindowEvent;  
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
@@ -17,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.game.model.BestScore;
 import org.game.view.CountScore;
@@ -26,6 +29,7 @@ import org.game.view.InitGame;
 import org.game.view.MatrixTextColor;
 import org.xml.sax.SAXException;
 
+
 public class GameMainWindow extends JFrame{
 	
 	private GameCreatNew CreatNewController;
@@ -33,11 +37,12 @@ public class GameMainWindow extends JFrame{
 	private MatrixTextColor MatrixController;
 	private InitGame GameRestart;
 	private CountScore ScoreController;
+	private BestScore tmpScore;
 	
 	private int Score;
 	private JLabel[][] matrixGame;
 	
-	public GameMainWindow(){
+	public GameMainWindow() throws ParserConfigurationException, SAXException, IOException{
 		super();
 		setTitle("Game Java 2048");
 		getContentPane().setLayout(null);
@@ -89,7 +94,7 @@ public class GameMainWindow extends JFrame{
 		add(newGame);
 	
 		JLabel copyRight = new JLabel();
-		copyRight.setText("© 2014 Chuan Dong. Simulation of game 2048 by Java Swing");
+		copyRight.setText("Â© 2014 Chuan Dong. Simulation of game 2048 by Java Swing");
 		copyRight.setFont(new Font("", Font.BOLD,10));
 		copyRight.setBounds(20, 630, 150, 50);
 		add(copyRight);
@@ -128,16 +133,13 @@ public class GameMainWindow extends JFrame{
 		add(mainPanel);
 		
 		Score = 0;
+		bestScore.setText(" BEST : " + String.valueOf(ScoreController.getScoreXML().getScore()));
 		
 		/*
 		 * Get the best score from the xml file
 		 */
-		try {
-			ScoreController.setScore(ScoreController.getScoreXML());
-		} catch (ParserConfigurationException | SAXException | IOException e1) {
-			e1.printStackTrace();
-		}
-				
+
+		ScoreController.setScore(ScoreController.getScoreXML());
 		
 		newGame.addMouseListener(new MouseAdapter()
 		{
@@ -188,6 +190,20 @@ public class GameMainWindow extends JFrame{
 			}
 		});
 		
+		this.addWindowListener(new WindowAdapter() {  
+            public void windowClosing(WindowEvent e)  
+            {  
+            	if(Score > ScoreController.getScore().getScore()){
+						try {
+							ScoreController.setScoreXML(new BestScore(Score));
+						} catch (ParserConfigurationException | SAXException
+								| IOException | TransformerException e1) {
+							e1.printStackTrace();
+						}
+            	}           
+            }  
+        });  
+		
 		/*
 		 * Creat two random positions "2" elements for a new game
 		 */
@@ -205,7 +221,13 @@ public class GameMainWindow extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 		    public void run() {
-				GameMainWindow ex = new GameMainWindow();
+				GameMainWindow ex = null;
+				try {
+					ex = new GameMainWindow();
+				} catch (ParserConfigurationException | SAXException
+						| IOException e) {
+					e.printStackTrace();
+				}
 				ex.setVisible(true);
 		    }
 		});

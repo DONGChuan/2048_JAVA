@@ -10,7 +10,14 @@ package org.game.model;
 public class BestScore {
 	
 	int score;
-
+	
+	public BestScore(){
+	}
+	
+	public BestScore(int score){
+		this.score = score;
+	}
+	
 	public int getScore() {
 		return score;
 	}
