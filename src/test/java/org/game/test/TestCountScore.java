@@ -15,10 +15,14 @@ import org.xml.sax.SAXException;
 public class TestCountScore {
 
 	@Test
-	public void testGetScoreXML() throws ParserConfigurationException, SAXException, IOException {
+	public void testGetScoreXML() throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		
-		// Before test, set score in Game.xml to 100 
+		BestScore tmp = new BestScore();
+		tmp.setScore(100);
+		
 		CountScore a = new CountScore();
+		a.setScoreXML(tmp);
+		
 		a.setScore(a.getScoreXML());
 
 		assertEquals(100, a.getScore().getScore());
