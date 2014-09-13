@@ -7,11 +7,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;  
-import java.awt.event.WindowEvent;  
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,12 +31,15 @@ import org.xml.sax.SAXException;
 
 public class GameMainWindow extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private GameCreatNew CreatNewController;
 	private GameKeyEvent KeyEventController;
 	private MatrixTextColor MatrixController;
 	private InitGame GameRestart;
 	private CountScore ScoreController;
-	private BestScore tmpScore;
 	
 	private int Score;
 	private JLabel[][] matrixGame;
