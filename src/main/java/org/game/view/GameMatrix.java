@@ -13,11 +13,11 @@ import javax.swing.JLabel;
  *@author DONG Chuan
  *@version 1.0
  */
-public class MatrixTextColor {		
+public class GameMatrix {		
 	
-	public MatrixTextColor(){}
+	public GameMatrix(){}
 	
-	public void setMatrix(JLabel[][] matrixGame, int i, int j, String str){
+	public static void setMatrix(JLabel[][] matrixGame, int i, int j, String str){
 		
 		matrixGame[i][j].setFont(new Font(str,Font.BOLD,50)); 
 		matrixGame[i][j].setText(str);

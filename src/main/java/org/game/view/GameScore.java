@@ -18,20 +18,20 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class CountScore {
+public class GameScore {
 	
-	private BestScore score;
-	private final String PATHXML = "src/main/resources/org/game/resources/game.xml";
+	private static BestScore score;
+	private final static String PATHXML = "src/main/resources/org/game/resources/game.xml";
 	
-	public BestScore getScore() {
+	public static BestScore getScore() {
 		return score;
 	}
 
-	public void setScore(BestScore score) {
-		this.score = score;
+	public static void setScore(BestScore newScore) {
+		score = newScore;
 	}
 
-	public BestScore getScoreXML() throws ParserConfigurationException, SAXException, IOException {
+	public static BestScore getScoreXML() throws ParserConfigurationException, SAXException, IOException {
 		
 		File fXmlFile = new File(PATHXML);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -47,7 +47,7 @@ public class CountScore {
 		
 	}
 	
-    public void setScoreXML(BestScore score) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+    public static void setScoreXML(BestScore score) throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();

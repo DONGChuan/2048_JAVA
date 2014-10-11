@@ -21,11 +21,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.game.model.BestScore;
-import org.game.view.CountScore;
-import org.game.view.GameCreatNew;
+import org.game.view.GameScore;
+import org.game.view.GameNewCell;
 import org.game.view.GameKeyEvent;
-import org.game.view.InitGame;
-import org.game.view.MatrixTextColor;
+import org.game.view.GameInit;
+import org.game.view.GameMatrix;
 import org.xml.sax.SAXException;
 
 
@@ -35,11 +35,6 @@ public class GameMainWindow extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private GameCreatNew CreatNewController;
-	private GameKeyEvent KeyEventController;
-	private MatrixTextColor MatrixController;
-	private InitGame GameRestart;
-	private CountScore ScoreController;
 	
 	private int Score;
 	private JLabel[][] matrixGame;
@@ -114,41 +109,34 @@ public class GameMainWindow extends JFrame{
 		
 		matrixGame = new JLabel[4][4];	
 		
-		MatrixController = new MatrixTextColor();
-		CreatNewController = new GameCreatNew();
-		KeyEventController = new GameKeyEvent();
-		GameRestart = new InitGame();
-		ScoreController = new CountScore();
-		
 		for(int i = 0; i < 4; i++){			
 			for(int j = 0; j < 4; j++){
 				matrixGame[i][j] = new JLabel();
 				matrixGame[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				matrixGame[i][j].setBounds(120 * j, 120 * i, 100, 100);
-				MatrixController.setMatrix(matrixGame, i, j, "");
+				GameMatrix.setMatrix(matrixGame, i, j, "");
 				matrixGame[i][j].setOpaque(true);
 				mainPanel.add(matrixGame[i][j]);							
-				
 			}
 		}
 			
 		add(mainPanel);
 		
 		Score = 0;
-		bestScore.setText(" BEST : " + String.valueOf(ScoreController.getScoreXML().getScore()));
+		bestScore.setText(" BEST : " + String.valueOf(GameScore.getScoreXML().getScore()));
 		
 		/*
 		 * Get the best score from the xml file
 		 */
 
-		ScoreController.setScore(ScoreController.getScoreXML());
+		GameScore.setScore(GameScore.getScoreXML());
 		
 		newGame.addMouseListener(new MouseAdapter()
 		{
 		    @Override
 		    public void mouseClicked(MouseEvent arg0) 
 		    {
-		    	GameRestart.startNewGame(matrixGame);
+		    	GameInit.startNewGame(matrixGame);
 		    }
 		});
 		
@@ -159,25 +147,25 @@ public class GameMainWindow extends JFrame{
 				//Left
 				case KeyEvent.VK_LEFT:
 				case KeyEvent.VK_A:		    
-					Score += KeyEventController.do_Left(matrixGame);
+					Score += GameKeyEvent.do_Left(matrixGame);
 					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				//Right
 				case KeyEvent.VK_RIGHT:
 				case KeyEvent.VK_D:
-					Score += KeyEventController.do_Right(matrixGame);
+					Score += GameKeyEvent.do_Right(matrixGame);
 					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				//Up
 				case KeyEvent.VK_UP:
 				case KeyEvent.VK_W:
-					Score += KeyEventController.do_Up(matrixGame);
+					Score += GameKeyEvent.do_Up(matrixGame);
 					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				//Down
 				case KeyEvent.VK_DOWN:
 				case KeyEvent.VK_S:
-					Score += KeyEventController.do_Down(matrixGame);
+					Score += GameKeyEvent.do_Down(matrixGame);
 					currentScore.setText(" SCORE : " + String.valueOf(Score));
 					break;
 				}
@@ -186,7 +174,7 @@ public class GameMainWindow extends JFrame{
 				* Compared with the best score, if > bestScore, show this score 
 				* in the JLabel bestScore 
 				*/
-				if(Score > ScoreController.getScore().getScore()){
+				if(Score > GameScore.getScore().getScore()){
 					bestScore.setText(" BEST : " + String.valueOf(Score));
 				}
 			}
@@ -195,9 +183,9 @@ public class GameMainWindow extends JFrame{
 		this.addWindowListener(new WindowAdapter() {  
             public void windowClosing(WindowEvent e)  
             {  
-            	if(Score > ScoreController.getScore().getScore()){
+            	if(Score > GameScore.getScore().getScore()){
 						try {
-							ScoreController.setScoreXML(new BestScore(Score));
+							GameScore.setScoreXML(new BestScore(Score));
 						} catch (ParserConfigurationException | SAXException
 								| IOException | TransformerException e1) {
 							e1.printStackTrace();
@@ -209,13 +197,9 @@ public class GameMainWindow extends JFrame{
 		/*
 		 * Creat two random positions "2" elements for a new game
 		 */
-		CreatNewController.CreateNew(matrixGame);
-		CreatNewController.CreateNew(matrixGame);
+		GameNewCell.CreateNew(matrixGame);
+		GameNewCell.CreateNew(matrixGame);
 		
-	}
-	
-	public void setLayoutWindow(){
-					
 	}
 	    
 	public static void main(String[] args) {
@@ -233,19 +217,6 @@ public class GameMainWindow extends JFrame{
 				ex.setVisible(true);
 		    }
 		});
-//		EventQueue.invokeLater(new Runnable(){
-//			public void run(){
-//				try{
-//					GameMainWindow frame = new GameMainWindow();
-//					frame.setVisible(true);
-//				//	Thread thread = new Thread(frame);
-//				//	thread.start();
-//				}
-//				catch(Exception e1){
-//					e1.printStackTrace();
-//				}
-//			}
-//		});
 	}
 	
 }

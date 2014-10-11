@@ -9,10 +9,9 @@ package org.game.model;
  */
 public class BestScore {
 	
-	int score;
+	private int score;
 	
-	public BestScore(){
-	}
+	public BestScore(){}
 	
 	public BestScore(int score){
 		this.score = score;

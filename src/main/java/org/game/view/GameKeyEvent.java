@@ -12,134 +12,127 @@ import javax.swing.JLabel;
  */
 public class GameKeyEvent {
 	
-	private MatrixTextColor MatrixController;
-	private GameCreatNew CreatNewController;
-	private int edgeLimit;
-	private String str;
-	private String strNeighboour;
 	
-	public GameKeyEvent(){
-		CreatNewController = new GameCreatNew();
-		MatrixController = new MatrixTextColor();
-	}
-	
-	public int do_Left(JLabel[][] matrixGame){
+	public static int do_Left(JLabel[][] matrixGame){
 		
-		int score = 0;
-		int num;
+		int num, score = 0, edgeLimit = 0;
+		String str, strNeighbour;
+		
 		for(int i = 0; i < 4; i++){	
 			edgeLimit = 5;
 			for(int k = 0; k < 3; k++){
 				for(int j = 1; j < 4; j++){					
 					str = matrixGame[i][j].getText();			
-					strNeighboour = matrixGame[i][j-1].getText();			
+					strNeighbour = matrixGame[i][j-1].getText();			
 					
-					if(strNeighboour.compareTo("") == 0){
-						MatrixController.setMatrix(matrixGame, i, j-1, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
-					}else if((str.compareTo(strNeighboour) == 0) && (j !=edgeLimit) && (j != edgeLimit-1)){			
+					if(strNeighbour.compareTo("") == 0){
+						GameMatrix.setMatrix(matrixGame, i, j-1, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
+					}else if((str.compareTo(strNeighbour) == 0) && (j !=edgeLimit) && (j != edgeLimit-1)){			
 						num  = Integer.parseInt(str);
 						score += num;
 						str = String.valueOf(2 * num);
-						MatrixController.setMatrix(matrixGame, i, j-1, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
+						GameMatrix.setMatrix(matrixGame, i, j-1, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
 						edgeLimit = j;
 					}
 				}	
 			}
 		}
-		CreatNewController.CreateNew(matrixGame);
+		GameNewCell.CreateNew(matrixGame);
 		return score;
 	}
 		
-	public int do_Right(JLabel[][] matrixGame){	
+	public static int do_Right(JLabel[][] matrixGame){	
 		
-		int score = 0;
-		int num;
+		int num, score = 0, edgeLimit = 0;
+		String str, strNeighbour;
+		
 		for(int i = 0; i < 4; i ++){
 			edgeLimit = 5;
 			for(int k = 0; k < 3; k++){
 				for(int j = 2; j >= 0; j--){
 					str = matrixGame[i][j].getText();
-					strNeighboour = matrixGame[i][j + 1].getText();
+					strNeighbour = matrixGame[i][j + 1].getText();
 					
-					if(strNeighboour.compareTo("") == 0){
-						MatrixController.setMatrix(matrixGame, i, j+1, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
+					if(strNeighbour.compareTo("") == 0){
+						GameMatrix.setMatrix(matrixGame, i, j+1, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
 					}
-					else if(str.compareTo(strNeighboour) == 0 && j !=edgeLimit && j != edgeLimit+ 1){
+					else if(str.compareTo(strNeighbour) == 0 && j !=edgeLimit && j != edgeLimit+ 1){
 						num  = Integer.parseInt(str);
 						score += num;
 						str = String.valueOf(2 * num);
-						MatrixController.setMatrix(matrixGame, i, j+1, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
+						GameMatrix.setMatrix(matrixGame, i, j+1, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
 						edgeLimit = j;
 					}
 				}
 			}
 		}
-		CreatNewController.CreateNew(matrixGame);
+		GameNewCell.CreateNew(matrixGame);
 		return score;
 	}
 		
-	public int do_Up(JLabel[][] matrixGame){	
+	public static int do_Up(JLabel[][] matrixGame){	
 		
-		int score = 0;
-		int num;
+		int num, score = 0, edgeLimit = 0;
+		String str, strNeighbour;
+		
 		for(int j = 0; j < 4; j++){
 			edgeLimit = 5;
 			for(int k = 0; k < 3; k++){
 				for(int i = 1; i < 4; i++){
 					str = matrixGame[i][j].getText();
-					strNeighboour = matrixGame[i - 1][j].getText();
+					strNeighbour = matrixGame[i - 1][j].getText();
 				
-					if(strNeighboour.compareTo("") == 0){
-						MatrixController.setMatrix(matrixGame, i-1, j, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
+					if(strNeighbour.compareTo("") == 0){
+						GameMatrix.setMatrix(matrixGame, i-1, j, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
 					}
-					else if(str.compareTo(strNeighboour) == 0 && i != edgeLimit && i != edgeLimit -1){
+					else if(str.compareTo(strNeighbour) == 0 && i != edgeLimit && i != edgeLimit -1){
 						num  = Integer.parseInt(str);
 						score += num;
 						str = String.valueOf(2 * num);
-						MatrixController.setMatrix(matrixGame, i-1, j, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
+						GameMatrix.setMatrix(matrixGame, i-1, j, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
 						edgeLimit = i;
 					}
 				}
 			}
 		}
-		CreatNewController.CreateNew(matrixGame);
+		GameNewCell.CreateNew(matrixGame);
 		return score;
 	}
 		
-	public int do_Down(JLabel[][] matrixGame){	
+	public static int do_Down(JLabel[][] matrixGame){	
 		
-		int score = 0;
-		int num;
+		int num, score = 0, edgeLimit = 0;
+		String str, strNeighbour;
 		
 		for(int j = 0; j < 4; j ++){
 			edgeLimit = 5;
 			for(int k = 0; k < 5; k++){
 				for(int i = 2; i >= 0; i--){
 					str = matrixGame[i][j].getText();
-					strNeighboour = matrixGame[i + 1][j].getText();
+					strNeighbour = matrixGame[i + 1][j].getText();
 					
-					if(strNeighboour.compareTo("") == 0){
-						MatrixController.setMatrix(matrixGame, i+1, j, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
+					if(strNeighbour.compareTo("") == 0){
+						GameMatrix.setMatrix(matrixGame, i+1, j, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
 					}
-					else if(str.compareTo(strNeighboour) == 0 && i != edgeLimit && i != edgeLimit + 1){
+					else if(str.compareTo(strNeighbour) == 0 && i != edgeLimit && i != edgeLimit + 1){
 						num  = Integer.parseInt(str);
 						score += num;
 						str = String.valueOf(2 * num);
-						MatrixController.setMatrix(matrixGame, i+1, j, str);
-						MatrixController.setMatrix(matrixGame, i, j, "");
+						GameMatrix.setMatrix(matrixGame, i+1, j, str);
+						GameMatrix.setMatrix(matrixGame, i, j, "");
 						edgeLimit = i;
 					}
 				}
 			}
 		}
-		CreatNewController.CreateNew(matrixGame);
+		GameNewCell.CreateNew(matrixGame);
 		return score;
 	}
 }

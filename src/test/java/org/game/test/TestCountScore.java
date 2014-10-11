@@ -8,7 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.game.model.BestScore;
-import org.game.view.CountScore;
+import org.game.view.GameScore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -20,7 +20,7 @@ public class TestCountScore {
 		BestScore tmp = new BestScore();
 		tmp.setScore(100);
 		
-		CountScore a = new CountScore();
+		GameScore a = new GameScore();
 		a.setScoreXML(tmp);
 		
 		a.setScore(a.getScoreXML());
@@ -34,7 +34,7 @@ public class TestCountScore {
 		BestScore tmp = new BestScore();
 		tmp.setScore(2000);
 		
-		CountScore a = new CountScore();
+		GameScore a = new GameScore();
 		a.setScoreXML(tmp);
 		
 		System.out.println(a.getScoreXML().getScore());
